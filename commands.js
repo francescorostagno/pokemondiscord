@@ -86,3 +86,10 @@ export const RULES_COMMAND = {
   description: 'Basic guild command',
   type: 1,
 }
+
+
+export const HELP_COMMAND = {
+  name: 'help',
+  description: 'Basic guild command',
+  type: 1,
+}

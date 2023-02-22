@@ -13,6 +13,7 @@ import {
   TEST_COMMAND,
   HasGuildCommands,
   RULES_COMMAND,
+  HELP_COMMAND
 } from './commands.js';
 
 // Create an express app
@@ -101,6 +102,16 @@ app.post('/interactions', async function (req, res) {
           + "⛔️ VIETATO vendere materiale sealed a meno che non sia materiale old o appartengano alla propria collezione privata \n"
           + "✅ possibilità di condividere link di aste o claim nei vari gruppo \n" 
           + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
+        },
+      });
+    }
+
+    if( name === 'help'){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95"
         },
       });
     }
@@ -195,6 +206,7 @@ app.listen(3000, () => {
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
     CHALLENGE_COMMAND,
-    RULES_COMMAND
+    RULES_COMMAND,
+    HELP_COMMAND
   ]);
 });
