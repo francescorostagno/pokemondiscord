@@ -12,6 +12,7 @@ import {
   CHALLENGE_COMMAND,
   TEST_COMMAND,
   HasGuildCommands,
+  RULES_COMMAND,
 } from './commands.js';
 
 // Create an express app
@@ -85,6 +86,21 @@ app.post('/interactions', async function (req, res) {
               ],
             },
           ],
+        },
+      });
+    }
+    
+    if( name === 'rules'){
+       return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content:  "⛔️NO richieste personali a Mirko e Matteo. Per queste usate sempre la chat privata di FB o whatsapp! \n"
+          + "⛔️NO continui spam se le carte non interessano \n"
+          + "⛔️VIETATO proporre articoli di card game o Funko Pop! Che indirizzino ad altri negozi o store online. \n"
+          + "⛔️VIETATO vendere materiale sealed a meno che non sia materiale old o appartengano alla propria collezione privata \n"
+          + "possibilità di condividere link di aste o claim nei vari gruppo \n" 
+          + "possibilità di proporre carte in vendita di tutto il TCG \n"
         },
       });
     }
@@ -179,5 +195,6 @@ app.listen(3000, () => {
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
     CHALLENGE_COMMAND,
+    RULES_COMMAND
   ]);
 });
