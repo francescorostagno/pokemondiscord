@@ -80,3 +80,9 @@ export const CHALLENGE_COMMAND = {
   ],
   type: 1,
 };
+
+export const RULES_COMMAND = {
+  name: 'rules',
+  description: 'Basic guild command',
+  type: 1,
+}
