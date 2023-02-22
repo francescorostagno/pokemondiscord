@@ -24,6 +24,12 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 // Store for in-progress games. In production, you'd want to use a DB
 const activeGames = {};
+const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx';
+
+
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
