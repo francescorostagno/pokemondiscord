@@ -16,8 +16,6 @@ import {
 
 // Create an express app
 const app = express();
-// Get port, or default to 3000
-const PORT = process.env.PORT || 3000;
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
@@ -56,43 +54,43 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
-    
     // "challenge" guild command
     if (name === 'challenge' && id) {
-        const userId = req.body.member.user.id;
-        // User's object choice
-        const objectName = req.body.data.options[0].value;
+      const userId = req.body.member.user.id;
+      // User's object choice
+      const objectName = req.body.data.options[0].value;
 
-        // Create active game using message ID as the game ID
-        activeGames[id] = {
-            id: userId,
-            objectName,
-        };
+      // Create active game using message ID as the game ID
+      activeGames[id] = {
+        id: userId,
+        objectName,
+      };
 
-        return res.send({
+      return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-            // Fetches a random emoji to send from a helper function
-            content: `Rock papers scissors challenge from <@${userId}>`,
-            components: [
+          // Fetches a random emoji to send from a helper function
+          content: `Rock papers scissors challenge from <@${userId}>`,
+          components: [
             {
-                type: MessageComponentTypes.ACTION_ROW,
-                components: [
+              type: MessageComponentTypes.ACTION_ROW,
+              components: [
                 {
-                    type: MessageComponentTypes.BUTTON,
-                    // Append the game ID to use later on
-                    custom_id: `accept_button_${req.body.id}`,
-                    label: 'Accept',
-                    style: ButtonStyleTypes.PRIMARY,
+                  type: MessageComponentTypes.BUTTON,
+                  // Append the game ID to use later on
+                  custom_id: `accept_button_${req.body.id}`,
+                  label: 'Accept',
+                  style: ButtonStyleTypes.PRIMARY,
                 },
-                ],
+              ],
             },
-            ],
+          ],
         },
-        });
+      });
     }
   }
-   /**
+
+  /**
    * Handle requests from interactive components
    * See https://discord.com/developers/docs/interactions/message-components#responding-to-a-component-interaction
    */
@@ -174,8 +172,8 @@ app.post('/interactions', async function (req, res) {
   }
 });
 
-app.listen(PORT, () => {
-  console.log('Listening on port', PORT);
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
 
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
