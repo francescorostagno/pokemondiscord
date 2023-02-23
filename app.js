@@ -1,5 +1,5 @@
 import express from 'express';
-import {Client, Events,GatewayIntentBits } from 'discord.js'
+import { Client, Intents } from "discord.js";
 import {
   InteractionType,
   InteractionResponseType,
@@ -24,11 +24,24 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 // Store for in-progress games. In production, you'd want to use a DB
 const activeGames = {};
-const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx';
+const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx.3Fha_5auK5FA3YCHQjxz6kZvS6PDLwH7S2VGns';
 
 
-// Create a new client instance
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES]
+});
+
+client.on("ready", () => {
+  console.log("I am ready!");
+});
+
+client.on("messageCreate", (message) => {
+  if (message.content.startsWith("ping")) {
+    message.channel.send("pong!");
+  }
+});
+
+client.login(token);
 
 
 /**
