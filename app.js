@@ -34,8 +34,7 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on(Events.InteractionCreate, async interaction => {
-
-
+  console.log(interaction)
 });
 
 
@@ -48,7 +47,7 @@ client.login(token);
 app.post('/interactions', async function (req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
-
+  console.log(data);
   /**
    * Handle verification requests
    */
@@ -221,8 +220,7 @@ app.listen(3000, () => {
   console.log('Listening on port 3000');
 
   // Check if guild commands from commands.json are installed (if not, install them)
-  
-(process.env.APP_ID, process.env.GUILD_ID, [
+  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
     CHALLENGE_COMMAND,
     RULES_COMMAND,
