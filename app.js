@@ -217,7 +217,7 @@ app.listen(3000, () => {
 
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(`"${member.user.username}" has joined this server`);
+    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(`"${member.user.username}" si è unito! grazie per essere entrato sei il benvenuto!`);
   });
 
   client.on("messageCreate",msg => {
