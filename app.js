@@ -27,7 +27,10 @@ const activeGames = {};
 const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx.3Fha_5auK5FA3YCHQjxz6kZvS6PDLwH7S2VGns';
 
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({ intents: [GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,] });
 
 client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
@@ -36,6 +39,13 @@ client.once(Events.ClientReady, c => {
 client.on('guildMemberAdd',member => {
   member.guild.channels.get('channelID').send("Welcome")
 });
+
+client.on("message",msg => {
+  msg.reply("test")
+  if(msg.content === "ping"){
+    msg.reply("pong")
+  }
+})
 
 
 client.login(token);
