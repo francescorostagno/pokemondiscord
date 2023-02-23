@@ -83,9 +83,28 @@ app.post('/interactions', async function (req, res) {
         return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-         
             content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95",
-          
+            components: [
+              {
+                 type: MessageComponentTypes.ACTION_ROW,
+                 components: [
+                   {
+                     type: 3,
+                     custom_id: "menu_help",
+                     options: [
+                       {
+                         label: "Fra",
+                         value: "@fra"
+                       }
+                     ]
+                   }
+                 ],
+                  placeholder: "Scegli admin",
+                 
+              }
+              
+            ],
+            
           },
         });
         break;
@@ -131,6 +150,12 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.MESSAGE_COMPONENT) {
     // custom_id set in payload when sending message component
     const componentId = data.custom_id;
+    console.log(componentId);
+    switch(componentId){
+      case 'menu_help':
+        
+      break;
+    }
     
   }
 });
