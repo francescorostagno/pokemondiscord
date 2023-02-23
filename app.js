@@ -89,8 +89,10 @@ app.post('/interactions', async function (req, res) {
                  type: MessageComponentTypes.ACTION_ROW,
                  components: [
                    {
-                     type: 5,
-              
+                     type: 7,
+                     custom_id : 'help_menu',
+                    
+                
                    }
                  ]
                  
@@ -145,8 +147,8 @@ app.post('/interactions', async function (req, res) {
     const componentId = data.custom_id;
     console.log(componentId);
     switch(componentId){
-      case 'menu_help':
-         const userId = req.body.member.user.id;
+      case 'help_menu':
+        const userId = req.body.member.user.id;
         const objectName = data.values[0];
         console.log(userId);
         console.log(objectName);
