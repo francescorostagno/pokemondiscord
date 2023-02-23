@@ -90,8 +90,7 @@ app.post('/interactions', async function (req, res) {
                  components: [
                    {
                      type: 7,
-                     custom_id : 'help_menu',
-                    
+                     custom_id : 'help_menu'
                 
                    }
                  ]
@@ -146,6 +145,7 @@ app.post('/interactions', async function (req, res) {
     // custom_id set in payload when sending message component
     const componentId = data.custom_id;
     console.log(componentId);
+    console.log(req.body)
     switch(componentId){
       case 'help_menu':
         const userId = req.body.member.user.id;
