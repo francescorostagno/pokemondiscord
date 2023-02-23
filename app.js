@@ -45,8 +45,10 @@ client.on("messageCreate",msg => {
   if(msg.content === "ping"){
     msg.reply("pong")
   }
+  if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
+    msg.reply("cestra libero")
+  }
 })
-
 
 client.login(token);
 
