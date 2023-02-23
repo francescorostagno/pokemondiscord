@@ -33,7 +33,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds,
 		GatewayIntentBits.GuildMembers,] });
 
 
-
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
  */
@@ -218,7 +217,7 @@ app.listen(3000, () => {
 
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    member.guild.channels.cache.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
+    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(`"${member.user.username}" has joined this server`);
   });
 
   client.on("messageCreate",msg => {
