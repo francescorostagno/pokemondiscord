@@ -56,28 +56,17 @@ app.post('/interactions', async function (req, res) {
 
     switch(name){
       case 'test':
+          // Send a message into the channel where command was triggered from
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            // Fetches a random emoji to send from a helper function
+            content: 'hello world ' + getRandomEmoji(),
+          },
+        });
         break;
       case 'rules':
-        break; 
-      case 'help':
-        break;
-    }
-    
-    
-    // "test" guild command
-    if (name === 'test') {
-      // Send a message into the channel where command was triggered from
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'hello world ' + getRandomEmoji(),
-        },
-      });
-    }
-
-    if( name === 'rules'){
-      return res.send({
+        return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
           // Fetches a random emoji to send from a helper function
@@ -89,48 +78,49 @@ app.post('/interactions', async function (req, res) {
               + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
         },
       });
-    }
-
-    if( name === 'help'){
-      return res.send({
+        break; 
+      case 'help':
+        return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          // Fetches a random emoji to send from a helper function
-          content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95"
-        },
-      });
-    }
-    
-    if( name === 'nerdstore'){
-      
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          content: 'Nerdstore a tutto tondo!',
-          // Buttons are inside of action rows
-          components: [
-            {
-              type: MessageComponentTypes.ACTION_ROW,
+         
+            content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95",
+          
+          },
+        });
+        break;
+      case 'nerdstore':
+         return res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+              content: 'Nerdstore a tutto tondo!',
+              // Buttons are inside of action rows
               components: [
                 {
-                  type: MessageComponentTypes.BUTTON,
-                  // Value for your app to identify the button
-                  label: 'Sito NerdStore',
-                  style: 5,
-                  url: 'http://nerdstoreitalia.it/'
-                },{
-                  type: MessageComponentTypes.BUTTON,
-                  // Value for your app to identify the button
-                  label: 'Gruppo Whatsapp',
-                  style: 5,
-                  url: 'https://chat.whatsapp.com/IUOcNPo0pWwKcq7PHcNvEe'
-                }
+                  type: MessageComponentTypes.ACTION_ROW,
+                  components: [
+                    {
+                      type: MessageComponentTypes.BUTTON,
+                      // Value for your app to identify the button
+                      label: 'Sito NerdStore',
+                      style: 5,
+                      url: 'http://nerdstoreitalia.it/'
+                    },{
+                      type: MessageComponentTypes.BUTTON,
+                      // Value for your app to identify the button
+                      label: 'Gruppo Whatsapp',
+                      style: 5,
+                      url: 'https://chat.whatsapp.com/IUOcNPo0pWwKcq7PHcNvEe'
+                    }
+                  ],
+                },
               ],
             },
-          ],
-        },
-      });
+          });
+        break;
+      
     }
+    
 
   }
 
