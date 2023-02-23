@@ -32,25 +32,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds,
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.GuildMembers,] });
 
-client.once(Events.ClientReady, c => {
-	console.log(`Ready! Logged in as ${c.user.tag}`);
-});
-
-client.on("guildMemberAdd", (member) => {
-  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  member.guild.channels.cache.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
-});
-
-client.on("messageCreate",msg => {
-  if(msg.content === "ping"){
-    msg.reply("pong")
-  }
-  if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-    msg.reply("cestra libero")
-  }
-})
-
-client.login(token);
 
 
 /**
@@ -231,6 +212,25 @@ app.post('/interactions', async function (req, res) {
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 
+  client.once(Events.ClientReady, c => {
+    console.log(`Ready! Logged in as ${c.user.tag}`);
+  });
+
+  client.on("guildMemberAdd", (member) => {
+    console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+    member.guild.channels.cache.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
+  });
+
+  client.on("messageCreate",msg => {
+    if(msg.content === "ping"){
+      msg.reply("pong")
+    }
+    if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
+      msg.reply("cestra libero")
+    }
+  })
+
+  client.login(token);
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
