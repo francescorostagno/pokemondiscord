@@ -96,7 +96,7 @@ app.post('/interactions', async function (req, res) {
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
-          content: 'Vai su nerdstore!',
+          content: 'Nerdstore a tutto tondo!',
           // Buttons are inside of action rows
           components: [
             {
@@ -105,11 +105,16 @@ app.post('/interactions', async function (req, res) {
                 {
                   type: MessageComponentTypes.BUTTON,
                   // Value for your app to identify the button
-                  custom_id: 'nerdstore',
-                  label: 'NerdStore',
-                  style: ButtonStyleTypes.LINK,
+                  label: 'Sito NerdStore',
+                  style: 5,
                   url: 'http://nerdstoreitalia.it/'
-                },
+                },{
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  label: 'Gruppo Whatsapp',
+                  style: 5,
+                  url: 'http://nerdstoreitalia.it/'
+                }
               ],
             },
           ],
@@ -126,17 +131,7 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.MESSAGE_COMPONENT) {
     // custom_id set in payload when sending message component
     const componentId = data.custom_id;
-    if( componentId === 'nerdstore'){
-       // custom_id set in payload when sending message component
-      const componentId = data.custom_id;
-      // user who clicked button
-      const userId = req.body.member.user.username;
-      console.log(req.body);
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: { content: `<@${userId} clicked the button` },
-      });
-    }
+    
   }
 });
 
