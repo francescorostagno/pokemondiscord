@@ -33,8 +33,8 @@ client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on(Events.InteractionCreate, async interaction => {
-  console.log(interaction)
+client.on('guildMemberAdd',member => {
+  member.guild.channels.get('channelID').send("Welcome")
 });
 
 
