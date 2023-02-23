@@ -37,11 +37,11 @@ client.once(Events.ClientReady, c => {
 });
 
 client.on('guildMemberAdd',member => {
-  member.guild.channels.get('channelID').send("Welcome")
+  member.guild.channels.get('channelID').send("Benvenuto nel gruppo discord!")
 });
 
-client.on("message",msg => {
-  msg.reply("test")
+client.on("messageCreate",msg => {
+  console.log(msg)
   if(msg.content === "ping"){
     msg.reply("pong")
   }
