@@ -144,14 +144,17 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.MESSAGE_COMPONENT) {
     // custom_id set in payload when sending message component
     const componentId = data.custom_id;
-    console.log(componentId);
-    console.log(req.body)
     switch(componentId){
       case 'help_menu':
         const userId = req.body.member.user.id;
         const objectName = data.values[0];
         console.log(userId);
         console.log(objectName);
+         // Send results
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: { content: `<@${userId}> ti sta cercando <@${objectName}>` },
+        });
       break;
     }
     
