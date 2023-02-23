@@ -36,12 +36,12 @@ client.once(Events.ClientReady, c => {
 	console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-client.on('guildMemberAdd',member => {
-  member.guild.channels.get('channelID').send("Benvenuto nel gruppo discord!")
+client.on("guildMemberAdd", (member) => {
+  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+  member.guild.channels.cache.find(c => c.name === "welcome").send(`"${member.user.username}" has joined this server`);
 });
 
 client.on("messageCreate",msg => {
-  console.log(msg)
   if(msg.content === "ping"){
     msg.reply("pong")
   }
