@@ -89,17 +89,10 @@ app.post('/interactions', async function (req, res) {
                  type: MessageComponentTypes.ACTION_ROW,
                  components: [
                    {
-                     type: 3,
-                     custom_id: "menu_help",
-                     options: [
-                       {
-                         label: "Fra",
-                         value: "@fra"
-                       }
-                     ]
+                     type: 5,
+              
                    }
-                 ],
-                  placeholder: "Scegli admin",
+                 ]
                  
               }
               
@@ -153,7 +146,10 @@ app.post('/interactions', async function (req, res) {
     console.log(componentId);
     switch(componentId){
       case 'menu_help':
-        
+         const userId = req.body.member.user.id;
+        const objectName = data.values[0];
+        console.log(userId);
+        console.log(objectName);
       break;
     }
     
