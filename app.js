@@ -217,12 +217,11 @@ app.listen(3000, () => {
 
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato sei il benvenuto!`
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(msg);
+    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(`"${member.user.username}" si è unito! grazie per essere entrato sei il benvenuto!`);
   });
 
   client.on("messageCreate",msg => {
-    if(msg.content.toLowerCase() === "ping"){
+    if(msg.content === "ping"){
       msg.reply("pong")
     }
     if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
