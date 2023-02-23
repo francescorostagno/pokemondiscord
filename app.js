@@ -65,6 +65,31 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+
+    if( name === 'rules'){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content:  "⛔️ NO richieste personali a Mirko e Matteo. Per queste usate sempre la chat privata di FB o whatsapp! \n"
+              + "⛔️ NO continui spam se le carte non interessano \n"
+              + "⛔️ VIETATO proporre articoli di card game o Funko Pop! Che indirizzino ad altri negozi o store online. \n"
+              + "⛔️ VIETATO vendere materiale sealed a meno che non sia materiale old o appartengano alla propria collezione privata \n"
+              + "✅ possibilità di condividere link di aste o claim nei vari gruppo \n"
+              + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
+        },
+      });
+    }
+
+    if( name === 'help'){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          // Fetches a random emoji to send from a helper function
+          content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95"
+        },
+      });
+    }
     // "challenge" guild command
     if (name === 'challenge' && id) {
       const userId = req.body.member.user.id;
@@ -99,31 +124,7 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
-    
-    if( name === 'rules'){
-       return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content:  "⛔️ NO richieste personali a Mirko e Matteo. Per queste usate sempre la chat privata di FB o whatsapp! \n"
-          + "⛔️ NO continui spam se le carte non interessano \n"
-          + "⛔️ VIETATO proporre articoli di card game o Funko Pop! Che indirizzino ad altri negozi o store online. \n"
-          + "⛔️ VIETATO vendere materiale sealed a meno che non sia materiale old o appartengano alla propria collezione privata \n"
-          + "✅ possibilità di condividere link di aste o claim nei vari gruppo \n" 
-          + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
-        },
-      });
-    }
 
-    if( name === 'help'){
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content:  "Per qualsiasi dubbio contattate pure @Kr4ken, @molizenai, @rosta95"
-        },
-      });
-    }
   }
 
   /**
@@ -226,7 +227,7 @@ app.listen(3000, () => {
       msg.reply("pong")
     }
     if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-      msg.reply("cestra libero")
+      msg.reply("cestra libero " + getRandomEmoji())
     }
   })
 
