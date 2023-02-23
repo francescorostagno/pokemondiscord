@@ -94,8 +94,8 @@ export const HELP_COMMAND = {
   type: 1,
 }
 
-export const SITE_COMMAND = {
-  name: 'site',
+export const NERDSTORE_COMMAND = {
+  name: 'nerdstore',
   description: 'Basic guild command',
   type: 1,
 }

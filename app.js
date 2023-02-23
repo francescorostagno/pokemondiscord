@@ -14,7 +14,7 @@ import {
   HasGuildCommands,
   RULES_COMMAND,
   HELP_COMMAND,
-  SITE_COMMAND
+  NERDSTORE_COMMAND
 } from './commands.js';
 
 // Create an express app
@@ -54,6 +54,16 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.APPLICATION_COMMAND) {
     const { name } = data;
 
+    switch(name){
+      case 'test':
+        break;
+      case 'rules':
+        break; 
+      case 'help':
+        break;
+    }
+    
+    
     // "test" guild command
     if (name === 'test') {
       // Send a message into the channel where command was triggered from
@@ -91,7 +101,7 @@ app.post('/interactions', async function (req, res) {
       });
     }
     
-    if( name === 'site'){
+    if( name === 'nerdstore'){
       
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -113,7 +123,7 @@ app.post('/interactions', async function (req, res) {
                   // Value for your app to identify the button
                   label: 'Gruppo Whatsapp',
                   style: 5,
-                  url: 'http://nerdstoreitalia.it/'
+                  url: 'https://chat.whatsapp.com/IUOcNPo0pWwKcq7PHcNvEe'
                 }
               ],
             },
@@ -149,12 +159,15 @@ app.listen(3000, () => {
   });
 
   client.on("messageCreate",msg => {
+    
     if(msg.content.toLowerCase() === "ping"){
       msg.reply("pong")
     }
+    
     if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
       msg.reply("cestra libero " + getRandomEmoji())
     }
+    
   })
 
   client.login(token);
@@ -163,6 +176,6 @@ app.listen(3000, () => {
     TEST_COMMAND,
     RULES_COMMAND,
     HELP_COMMAND,
-    SITE_COMMAND
+    NERDSTORE_COMMAND
   ]);
 });
