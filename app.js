@@ -1,5 +1,5 @@
 import express from 'express';
-import { Client, GatewayIntentBits } from "discord.js";
+import { Client, Events, GatewayIntentBits } from "discord.js";
 import {
   InteractionType,
   InteractionResponseType,
@@ -34,8 +34,10 @@ client.on('ready', () => {
 });
 
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isChatInputCommand()) return;
-  console.log('message')
+  if (!interaction.isChatInputCommand()){
+    console.log('message')
+    return;
+  };
   if (interaction.commandName === 'ping') {
     await interaction.reply('Pong!');
   }
