@@ -40,7 +40,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds,
 app.post('/interactions', async function (req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
-  console.log(data);
+  
   /**
    * Handle verification requests
    */
@@ -91,7 +91,9 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    
     if( name === 'site'){
+      
       return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
         data: {
@@ -106,7 +108,6 @@ app.post('/interactions', async function (req, res) {
                   // Value for your app to identify the button
                   custom_id: 'nerdstore',
                   label: 'NerdStore',
-                  url: 'http://nerdstoreitalia.it/',
                   style: ButtonStyleTypes.PRIMARY,
                 },
               ],
