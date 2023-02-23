@@ -93,3 +93,9 @@ export const HELP_COMMAND = {
   description: 'Basic guild command',
   type: 1,
 }
+
+export const SITE_COMMAND = {
+  name: 'site',
+  description: 'Basic guild command',
+  type: 1,
+}

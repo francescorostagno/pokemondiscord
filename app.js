@@ -14,7 +14,8 @@ import {
   TEST_COMMAND,
   HasGuildCommands,
   RULES_COMMAND,
-  HELP_COMMAND
+  HELP_COMMAND,
+  SITE_COMMAND
 } from './commands.js';
 
 // Create an express app
@@ -90,6 +91,30 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+    if( name === 'site'){
+      return res.send({
+        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+        data: {
+          content: 'A message with a button',
+          // Buttons are inside of action rows
+          components: [
+            {
+              type: MessageComponentTypes.ACTION_ROW,
+              components: [
+                {
+                  type: MessageComponentTypes.BUTTON,
+                  // Value for your app to identify the button
+                  custom_id: 'nerdstore',
+                  label: 'NerdStore',
+                  url: 'http://nerdstoreitalia.it/',
+                  style: ButtonStyleTypes.PRIMARY,
+                },
+              ],
+            },
+          ],
+        },
+      });
+    }
     // "challenge" guild command
     if (name === 'challenge' && id) {
       const userId = req.body.member.user.id;
@@ -124,6 +149,8 @@ app.post('/interactions', async function (req, res) {
         },
       });
     }
+
+
 
   }
 
@@ -237,6 +264,7 @@ app.listen(3000, () => {
     TEST_COMMAND,
     CHALLENGE_COMMAND,
     RULES_COMMAND,
-    HELP_COMMAND
+    HELP_COMMAND,
+    SITE_COMMAND
   ]);
 });
