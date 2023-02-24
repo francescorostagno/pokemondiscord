@@ -161,7 +161,7 @@ app.listen(3000, () => {
 
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato sei il benvenuto!`;
+    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
     let role = member.guild.roles.cache.find(role => role.name === "membro");
     member.roles.add(role);
     member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(msg);
@@ -174,7 +174,7 @@ app.listen(3000, () => {
     }
     
     if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-      msg.reply("cestra libero " + getRandomEmoji())
+      msg.reply("<@"+1078288702217924708+"> libero"  + getRandomEmoji())
     }
     
   })
