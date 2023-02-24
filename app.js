@@ -22,8 +22,7 @@ const app = express();
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
-// Store for in-progress games. In production, you'd want to use a DB
-const activeGames = {};
+
 const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx.3Fha_5auK5FA3YCHQjxz6kZvS6PDLwH7S2VGns';
 
 
@@ -64,7 +63,6 @@ app.post('/interactions', async function (req, res) {
             content: 'hello world ' + getRandomEmoji(),
           },
         });
-        break;
       case 'rules':
         return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -78,7 +76,6 @@ app.post('/interactions', async function (req, res) {
               + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
         },
       });
-        break; 
       case 'help':
         return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -101,7 +98,6 @@ app.post('/interactions', async function (req, res) {
             
           },
         });
-        break;
       case 'nerdstore':
          return res.send({
             type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -130,11 +126,7 @@ app.post('/interactions', async function (req, res) {
               ],
             },
           });
-        break;
-      
     }
-    
-
   }
 
   /**
@@ -155,7 +147,6 @@ app.post('/interactions', async function (req, res) {
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `<@${userId}> ti sta cercando <@${objectName}>` },
         });
-      break;
     }
     
   }
@@ -170,7 +161,9 @@ app.listen(3000, () => {
 
   client.on("guildMemberAdd", (member) => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato sei il benvenuto!`
+    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato sei il benvenuto!`;
+    let role = member.guild.roles.cache.find(role => role.name === "membro");
+    member.roles.add(role);
     member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(msg);
   });
 
