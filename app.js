@@ -174,8 +174,7 @@ app.listen(3000, () => {
     }
     
     if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-      let memberId = 1078288702217924708;
-      msg.reply(`"${memberId}" Libero!` + getRandomEmoji())
+      msg.reply("Cestra libero " + getRandomEmoji())
     }
     
   })
