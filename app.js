@@ -175,7 +175,7 @@ app.listen(3000, () => {
   });
 
   client.on("messageCreate",msg => {
-    
+  
     if(msg.content.toLowerCase() === "ping"){
       msg.reply("pong")
     }
