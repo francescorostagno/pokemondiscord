@@ -23,7 +23,7 @@ const app = express();
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 
 
-const token = 'MTA3NzU5NTQ5NjcxNTEzNzE2Ng.GlmoDx.3Fha_5auK5FA3YCHQjxz6kZvS6PDLwH7S2VGns';
+const token =  process.env.DISCORD_TOKEN;
 
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds,
