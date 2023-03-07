@@ -1,21 +1,8 @@
 import express from 'express';
-import { Client, Events, GatewayIntentBits } from "discord.js";
-import {
-  InteractionType,
-  InteractionResponseType,
-  InteractionResponseFlags,
-  MessageComponentTypes,
-  ButtonStyleTypes,
-} from 'discord-interactions';
-import { VerifyDiscordRequest, getRandomEmoji, DiscordRequest } from './utils.js';
-import { getShuffledOptions, getResult } from './game.js';
-import {
-  TEST_COMMAND,
-  HasGuildCommands,
-  RULES_COMMAND,
-  HELP_COMMAND,
-  NERDSTORE_COMMAND
-} from './commands.js';
+import {Client, Events, GatewayIntentBits} from "discord.js";
+import {InteractionResponseType, InteractionType, MessageComponentTypes,} from 'discord-interactions';
+import {getRandomEmoji, VerifyDiscordRequest} from './utils.js';
+import {HasGuildCommands, HELP_COMMAND, NERDSTORE_COMMAND, RULES_COMMAND, TEST_COMMAND} from './commands.js';
 
 // Create an express app
 const app = express();
@@ -155,45 +142,7 @@ app.post('/interactions', async function (req, res) {
 app.listen(3000, () => {
   console.log('Listening on port 3000');
 
-  client.once(Events.ClientReady, c => {
-    console.log(`Ready! Logged in as ${c.user.tag}`);
-  });
 
-  client.on("guildMemberAdd", (member) => {
-    console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
-    let role = member.guild.roles.cache.find(role => role.name === "membro");
-    const joinembed = new Discord.MessageEmbed()
-        .setTitle(`A new member just arrived!`)
-        .setDescription(msg)
-        .setColor("#FF0000")
-    console.log(msg);
-    console.log(role);
-    member.roles.add(role);
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
-  });
-
-  client.on("messageCreate",msg => {
-    console.log(msg);
-    if(msg.content.toLowerCase() === "ping"){
-      msg.reply("pong")
-    }
-    
-    if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-      msg.reply("Cestra libero " + getRandomEmoji())
-    }
-    
-  })
-
-  client.on('guildMemberRemove',(member) => {
-    let goodbyembed = new Discord.MessageEmbed()
-        .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
-        .setDescription("Sad! Let's just hope that they enjoyed their stay")
-        .setColor("FF0000");
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
-  })
-
-  client.login(token);
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
@@ -202,3 +151,42 @@ app.listen(3000, () => {
     NERDSTORE_COMMAND
   ]);
 });
+client.once(Events.ClientReady, c => {
+  console.log(`Ready! Logged in as ${c.user.tag}`);
+});
+
+client.on("guildMemberAdd", (member) => {
+  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+  let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
+  let role = member.guild.roles.cache.find(role => role.name === "membro");
+  const joinembed = new Discord.MessageEmbed()
+      .setTitle(`A new member just arrived!`)
+      .setDescription(msg)
+      .setColor("#FF0000")
+  console.log(msg);
+  console.log(role);
+  member.roles.add(role);
+  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
+});
+
+client.on("messageCreate",msg => {
+  console.log(msg);
+  if(msg.content.toLowerCase() === "ping"){
+    msg.reply("pong")
+  }
+
+  if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
+    msg.reply("Cestra libero " + getRandomEmoji())
+  }
+
+})
+
+client.on('guildMemberRemove',(member) => {
+  let goodbyembed = new Discord.MessageEmbed()
+      .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
+      .setDescription("Sad! Let's just hope that they enjoyed their stay")
+      .setColor("FF0000");
+  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
+})
+
+client.login(token);
