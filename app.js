@@ -163,14 +163,18 @@ app.listen(3000, () => {
     console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
     let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
     let role = member.guild.roles.cache.find(role => role.name === "membro");
+    const joinembed = new Discord.MessageEmbed()
+        .setTitle(`A new member just arrived!`)
+        .setDescription(msg)
+        .setColor("#FF0000")
     console.log(msg);
     console.log(role);
     member.roles.add(role);
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(msg);
+    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
   });
 
   client.on("messageCreate",msg => {
-  
+    console.log(msg);
     if(msg.content.toLowerCase() === "ping"){
       msg.reply("pong")
     }
@@ -179,6 +183,14 @@ app.listen(3000, () => {
       msg.reply("Cestra libero " + getRandomEmoji())
     }
     
+  })
+
+  client.on('guildMemberRemove',(member) => {
+    let goodbyembed = new Discord.MessageEmbed()
+        .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
+        .setDescription("Sad! Let's just hope that they enjoyed their stay")
+        .setColor("FF0000");
+    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
   })
 
   client.login(token);
