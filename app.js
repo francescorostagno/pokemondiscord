@@ -203,6 +203,14 @@ client.on('guildMemberRemove',(member) => {
   member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
 })
 
+// Error Logging
+client.on('error', (e) => {
+  console.log(e)
+})
+client.on('warn', (e) => {
+  console.log(e)
+})
+
 
 app.listen(3000, () => {
   console.log('Listening on port 3000');
