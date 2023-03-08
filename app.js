@@ -139,18 +139,10 @@ app.post('/interactions', async function (req, res) {
   }
 });
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+app.get('/',function (req, res){
+  res.send('Pokemon Discord Bot');
+})
 
-
-  // Check if guild commands from commands.json are installed (if not, install them)
-  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
-    TEST_COMMAND,
-    RULES_COMMAND,
-    HELP_COMMAND,
-    NERDSTORE_COMMAND
-  ]);
-});
 client.once(Events.ClientReady, c => {
   console.log(`Ready! Logged in as ${c.user.tag}`);
 });
@@ -190,3 +182,15 @@ client.on('guildMemberRemove',(member) => {
 })
 
 client.login(token);
+app.listen(3000, () => {
+  console.log('Listening on port 3000');
+
+
+  // Check if guild commands from commands.json are installed (if not, install them)
+  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
+    TEST_COMMAND,
+    RULES_COMMAND,
+    HELP_COMMAND,
+    NERDSTORE_COMMAND
+  ]);
+});
