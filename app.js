@@ -204,17 +204,27 @@ client.on('guildMemberRemove',(member) => {
 })
 
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
 
-  // Check if guild commands from commands.json are installed (if not, install them)
-  HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
-    TEST_COMMAND,
-    RULES_COMMAND,
-    HELP_COMMAND,
-    NERDSTORE_COMMAND,
-    SELL_RULES_COMMAND
-  ]);
-  client.login(token);
-});
 
+function keepAlive(){
+  app.listen(3000, () => {
+    console.log('Listening on port 3000');
+
+    // Check if guild commands from commands.json are installed (if not, install them)
+    HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
+      TEST_COMMAND,
+      RULES_COMMAND,
+      HELP_COMMAND,
+      NERDSTORE_COMMAND,
+      SELL_RULES_COMMAND
+    ]);
+
+  });
+}
+
+app.all('/',function (req, res){
+  res.send('Your bot is alive!');
+})
+
+keepAlive();
+client.login(token);
