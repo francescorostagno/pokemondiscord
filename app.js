@@ -70,18 +70,18 @@ app.post('/interactions', async function (req, res) {
               + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
         },
       });
-        break
+
       case 'sell_rules':
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
             // Fetches a random emoji to send from a helper function
             content: "I Post Nei Canali Di Vendita Devono Contentere: \n" +
-                    + " ✅ Nome della carta \n" +
-                    + " ✅ Nome del set \n" +
-                    + " ✅ Lingua \n" +
-                    + " ✅ Condizioni \n" +
-                    + " ✅ Prezzo \n"
+                    + "✅ Nome della carta \n"
+                    + "✅ Nome del set \n"
+                    + "✅ Lingua \n"
+                    + "✅ Condizioni \n"
+                    + "✅ Prezzo \n"
           }
         })
 
