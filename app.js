@@ -77,11 +77,11 @@ app.post('/interactions', async function (req, res) {
           data: {
             // Fetches a random emoji to send from a helper function
             content: "I Post Nei Canali Di Vendita Devono Contentere: \n" +
-                    + " - Nome della carta \n" +
-                    + " - Nome del set \n" +
-                    + " - Lingua \n" +
-                    + " - Condizioni \n" +
-                    + " - Prezzo \n"
+                    + " ✅ Nome della carta \n" +
+                    + " ✅ Nome del set \n" +
+                    + " ✅ Lingua \n" +
+                    + " ✅ Condizioni \n" +
+                    + " ✅ Prezzo \n"
           }
         })
 
