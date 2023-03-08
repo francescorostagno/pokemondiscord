@@ -99,3 +99,9 @@ export const NERDSTORE_COMMAND = {
   description: 'Basic guild command',
   type: 1,
 }
+
+export const SELL_RULES_COMMAND = {
+  name: 'sell_rules',
+  description: 'Basic guild command',
+  type: 1,
+}

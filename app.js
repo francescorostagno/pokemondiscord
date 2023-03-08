@@ -2,7 +2,14 @@ import express from 'express';
 import {Client, Events, GatewayIntentBits} from "discord.js";
 import {InteractionResponseType, InteractionType, MessageComponentTypes,} from 'discord-interactions';
 import {getRandomEmoji, VerifyDiscordRequest} from './utils.js';
-import {HasGuildCommands, HELP_COMMAND, NERDSTORE_COMMAND, RULES_COMMAND, TEST_COMMAND} from './commands.js';
+import {
+  HasGuildCommands,
+  HELP_COMMAND,
+  NERDSTORE_COMMAND,
+  RULES_COMMAND,
+  SELL_RULES_COMMAND,
+  TEST_COMMAND
+} from './commands.js';
 
 // Create an express app
 const app = express();
@@ -63,6 +70,21 @@ app.post('/interactions', async function (req, res) {
               + "✅ possibilità di proporre carte in vendita di tutto il TCG \n"
         },
       });
+        break
+      case 'sell_rules':
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: {
+            // Fetches a random emoji to send from a helper function
+            content: "I Post Nei Canali Di Vendita Devono Contentere: \n" +
+                    + " - Nome della carta \n" +
+                    + " - Nome del set \n" +
+                    + " - Lingua \n" +
+                    + " - Condizioni \n" +
+                    + " - Prezzo \n"
+          }
+        })
+
       case 'help':
         return res.send({
         type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
@@ -191,6 +213,7 @@ app.listen(3000, () => {
     TEST_COMMAND,
     RULES_COMMAND,
     HELP_COMMAND,
-    NERDSTORE_COMMAND
+    NERDSTORE_COMMAND,
+    SELL_RULES_COMMAND
   ]);
 });
