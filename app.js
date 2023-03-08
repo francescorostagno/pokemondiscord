@@ -203,10 +203,9 @@ client.on('guildMemberRemove',(member) => {
   member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
 })
 
-client.login(token);
+
 app.listen(3000, () => {
   console.log('Listening on port 3000');
-
 
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
@@ -216,4 +215,5 @@ app.listen(3000, () => {
     NERDSTORE_COMMAND,
     SELL_RULES_COMMAND
   ]);
+  client.login(token);
 });
