@@ -76,7 +76,7 @@ app.post('/interactions', async function (req, res) {
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: {
             // Fetches a random emoji to send from a helper function
-            content: "I Post Nei Canali Di Vendita Devono Contentere: \n" +
+            content: "I Post Nei Canali Di Vendita Devono Contentere: \n"
                     + "✅ Nome della carta \n"
                     + "✅ Nome del set \n"
                     + "✅ Lingua \n"
