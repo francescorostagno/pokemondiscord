@@ -217,3 +217,20 @@ app.listen(3000, () => {
   ]);
   client.login(token);
 });
+
+// ACTIVITY STATUS SECTION
+
+let watching = [
+
+  `#general🍆🥵🥓`,
+  `haram content`,
+  ,
+
+
+]
+
+setInterval(function() {
+  let watchinging = watching[Math.floor(Math.random() * watching.length)];
+  client.user.setActivity(watchinging, {type: "WATCHING"});
+  // Options: Playing, Watching, Listening.
+}, 20000) // Put time here
