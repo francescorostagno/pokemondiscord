@@ -215,7 +215,7 @@ client.on('error', (e) => {
 client.on('warn', (e) => {
   console.log(e)
 })
-client.login(token);
+
 app.listen(3000, () => {
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
@@ -231,3 +231,4 @@ app.all('/',function (req, res){
   res.send('Your bot is alive!');
 })
 
+client.login(token);
