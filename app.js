@@ -206,7 +206,7 @@ client.on(Events.InteractionCreate, interaction => {
 });
 
 
-client.on('guildMemberRemove',(member) => {
+client.on(Events.GuildMemberRemove,(member) => {
   let goodbyembed = new Discord.MessageEmbed()
       .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
       .setDescription("Sad! Let's just hope that they enjoyed their stay")
@@ -215,10 +215,10 @@ client.on('guildMemberRemove',(member) => {
 })
 
 // Error Logging
-client.on('error', (e) => {
+client.on(Events.Error, (e) => {
   console.log(e)
 })
-client.on('warn', (e) => {
+client.on(Events.Warn, (e) => {
   console.log(e)
 })
 
