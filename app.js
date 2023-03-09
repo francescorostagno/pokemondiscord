@@ -165,54 +165,53 @@ app.get('/',function (req, res){
   res.send('Pokemon Discord Bot');
 })
 
-app.listen(3000, () => {
-  console.log('Listening on port 3000');
+client.once(Events.ClientReady, c => {
+  console.log(`Ready! Logged in as ${c.user.tag}`);
+});
 
-  client.once(Events.ClientReady, c => {
-    console.log(`Ready! Logged in as ${c.user.tag}`);
-  });
+client.on("guildMemberAdd", (member) => {
+  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
+  let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
+  let role = member.guild.roles.cache.find(role => role.name === "membro");
+  const joinembed = new Discord.MessageEmbed()
+      .setTitle(`A new member just arrived!`)
+      .setDescription(msg)
+      .setColor("#FF0000")
+  console.log(msg);
+  console.log(role);
+  member.roles.add(role);
+  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
+});
 
-  client.on("guildMemberAdd", (member) => {
-    console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-    let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
-    let role = member.guild.roles.cache.find(role => role.name === "membro");
-    const joinembed = new Discord.MessageEmbed()
-        .setTitle(`A new member just arrived!`)
-        .setDescription(msg)
-        .setColor("#FF0000")
-    console.log(msg);
-    console.log(role);
-    member.roles.add(role);
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
-  });
+client.on("messageCreate",msg => {
+  console.log(msg);
+  if(msg.content.toLowerCase() === "ping"){
+    msg.reply("pong")
+  }
 
-  client.on("messageCreate",msg => {
-    console.log(msg);
-    if(msg.content.toLowerCase() === "ping"){
-      msg.reply("pong")
-    }
+  if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
+    msg.reply("Cestra libero " + getRandomEmoji())
+  }
 
-    if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-      msg.reply("Cestra libero " + getRandomEmoji())
-    }
+})
 
-  })
-
-  client.on('guildMemberRemove',(member) => {
-    let goodbyembed = new Discord.MessageEmbed()
-        .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
-        .setDescription("Sad! Let's just hope that they enjoyed their stay")
-        .setColor("FF0000");
-    member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
-  })
+client.on('guildMemberRemove',(member) => {
+  let goodbyembed = new Discord.MessageEmbed()
+      .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
+      .setDescription("Sad! Let's just hope that they enjoyed their stay")
+      .setColor("FF0000");
+  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
+})
 
 // Error Logging
-  client.on('error', (e) => {
-    console.log(e)
-  })
-  client.on('warn', (e) => {
-    console.log(e)
-  })
+client.on('error', (e) => {
+  console.log(e)
+})
+client.on('warn', (e) => {
+  console.log(e)
+})
+client.login(token);
+app.listen(3000, () => {
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
     TEST_COMMAND,
@@ -221,8 +220,6 @@ app.listen(3000, () => {
     NERDSTORE_COMMAND,
     SELL_RULES_COMMAND
   ]);
-  client.login(token);
-  console.log(client);
 });
 
 app.all('/',function (req, res){
