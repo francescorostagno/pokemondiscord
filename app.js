@@ -201,7 +201,7 @@ client.on(Events.MessageDelete,msg => {
   console.log(msg)
 })
 
-client.on(Events.InteractionCreate, async interaction => {
+client.on(Events.InteractionCreate, interaction => {
   console.log(interaction)
 });
 
