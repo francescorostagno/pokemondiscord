@@ -222,6 +222,7 @@ app.listen(3000, () => {
     SELL_RULES_COMMAND
   ]);
   client.login(token);
+  console.log(client);
 });
 
 app.all('/',function (req, res){
