@@ -165,8 +165,8 @@ app.get('/',function (req, res){
   res.send('Pokemon Discord Bot');
 })
 
-client.once(Events.ClientReady, c => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
+client.on('ready', () => {
+  console.log(`Logged in as ${client.user.tag}!`);
 });
 
 client.on("guildMemberAdd", (member) => {
@@ -196,11 +196,7 @@ client.on("messageCreate",msg => {
 })
 
 client.on('interactionCreate', async interaction => {
-  if (!interaction.isCommand()) return;
-
-  if (interaction.commandName === 'ping') {
-    await interaction.reply('Pong!');
-  }
+  console.log(interaction)
 });
 
 
