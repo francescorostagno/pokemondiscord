@@ -221,11 +221,10 @@ app.listen(3000, () => {
     NERDSTORE_COMMAND,
     SELL_RULES_COMMAND
   ]);
-
+  client.login(token);
 });
 
 app.all('/',function (req, res){
   res.send('Your bot is alive!');
 })
 
-client.login(token);
