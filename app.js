@@ -185,10 +185,8 @@ client.on(Events.GuildMemberAdd, (member) => {
 
 client.on(Events.MessageCreate,msg => {
 
-  if(msg.content.toLowerCase().indexOf("ping") !== -1 ){
-    msg.reply("pong").then(function (){
-      console.log('reply')
-    })
+  if(msg.content.toLowerCase() === "ping" ){
+    msg.reply("pong")
   }
 
   if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
@@ -233,8 +231,5 @@ app.listen(3000, () => {
   ]);
 });
 
-app.all('/',function (req, res){
-  res.send('Your bot is alive!');
-})
 
 client.login(token);
