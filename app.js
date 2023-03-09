@@ -165,11 +165,11 @@ app.get('/',function (req, res){
   res.send('Pokemon Discord Bot');
 })
 
-client.on('ready', () => {
+client.on(Events.ClientReady, () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
-client.on("guildMemberAdd", (member) => {
+client.on(Events.GuildMemberAdd, (member) => {
   console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
   let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
   let role = member.guild.roles.cache.find(role => role.name === "membro");
@@ -183,7 +183,7 @@ client.on("guildMemberAdd", (member) => {
   member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
 });
 
-client.on("messageCreate",msg => {
+client.on(Events.MessageCreate,msg => {
   console.log(msg);
   if(msg.content.toLowerCase() === "ping"){
     msg.reply("pong")
@@ -195,7 +195,7 @@ client.on("messageCreate",msg => {
 
 })
 
-client.on('interactionCreate', async interaction => {
+client.on(Events.InteractionCreate, async interaction => {
   console.log(interaction)
 });
 
