@@ -184,7 +184,7 @@ client.on(Events.GuildMemberAdd, (member) => {
 });
 
 client.on(Events.MessageCreate,msg => {
-  console.log(msg);
+
   if(msg.content.toLowerCase() === "ping"){
     msg.reply("pong")
   }
@@ -193,6 +193,10 @@ client.on(Events.MessageCreate,msg => {
     msg.reply("Cestra libero " + getRandomEmoji())
   }
 
+})
+
+client.on(Events.MessageDelete,msg => {
+  console.log(msg)
 })
 
 client.on(Events.InteractionCreate, async interaction => {
