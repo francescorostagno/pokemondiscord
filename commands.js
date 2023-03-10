@@ -105,3 +105,9 @@ export const SELL_RULES_COMMAND = {
   description: 'Basic guild command',
   type: 1,
 }
+
+export const ADD_FEEDBACK = {
+  name: 'add_feedback',
+  description: 'Basic guild command',
+  type: 1
+}

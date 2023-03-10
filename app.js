@@ -7,7 +7,8 @@ import {
   NERDSTORE_COMMAND,
   RULES_COMMAND,
   SELL_RULES_COMMAND,
-  TEST_COMMAND
+  TEST_COMMAND,
+  ADD_FEEDBACK
 } from './commands.js';
 
 // Create an express app
@@ -86,14 +87,11 @@ app.post('/interactions', async function (req, res) {
                    {
                      type: 7,
                      custom_id : 'help_menu'
-                
                    }
                  ]
                  
               }
-              
             ],
-            
           },
         });
       case 'nerdstore':
@@ -124,6 +122,24 @@ app.post('/interactions', async function (req, res) {
               ],
             },
           });
+      case 'add_feedback':
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data:{
+            title: 'Aggiungi un feedback',
+            custom_id: 'add_feedback',
+            components: [{
+              type: 4,
+              custom_id: "feedback",
+              label: "Aggiungi un nuovo feedback",
+              style: 2,
+              min_length: 1,
+              max_length: 4000,
+              placeholder: "Scrivi",
+              required: true
+            }]
+          }
+        })
     }
   }
 
@@ -134,16 +150,26 @@ app.post('/interactions', async function (req, res) {
   if (type === InteractionType.MESSAGE_COMPONENT) {
     // custom_id set in payload when sending message component
     const componentId = data.custom_id;
+    const userId = req.body.member.user.id;
+    const objectName = data.values[0];
     switch(componentId){
       case 'help_menu':
-        const userId = req.body.member.user.id;
-        const objectName = data.values[0];
+
         console.log(userId);
         console.log(objectName);
          // Send results
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `<@${userId}> ti sta cercando <@${objectName}>` },
+        });
+      case "add_feedback":
+
+
+        console.log(userId);
+        console.log(objectName);
+        return res.send({
+          type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+          data: { content: `Aggiunto` },
         });
     }
     
@@ -161,7 +187,8 @@ app.listen(3000, () => {
     RULES_COMMAND,
     HELP_COMMAND,
     NERDSTORE_COMMAND,
-    SELL_RULES_COMMAND
+    SELL_RULES_COMMAND,
+    ADD_FEEDBACK
   ]);
 });
 
