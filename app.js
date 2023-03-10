@@ -170,6 +170,8 @@ app.post('/interactions', async function (req, res) {
     const componentId = data.custom_id
     switch (componentId){
       case "add_feedback":
+        const objectName = data.values[0];
+        console.log(objectName)
        console.log(data);
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
