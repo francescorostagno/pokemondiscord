@@ -185,7 +185,7 @@ app.post('/interactions', async function (req, res) {
             body: {
               content: modalValues,
               components: [],
-            });
+            }});
             return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `Aggiunto` },
