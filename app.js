@@ -127,7 +127,7 @@ app.post('/interactions', async function (req, res) {
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data:{
             title: 'Aggiungi un feedback',
-            custom_id: 'add_feedback'
+            custom_id: 'add_feedback',
             components: [{
               type: 1,
               components: [{
