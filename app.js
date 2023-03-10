@@ -202,6 +202,7 @@ client.on(Events.MessageDelete,msg => {
 })
 
 client.on(Events.InteractionCreate, interaction => {
+  console.log('interaction')
   console.log(interaction)
 });
 
