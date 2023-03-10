@@ -131,6 +131,29 @@ app.post('/interactions', async function (req, res) {
             components: [{
               type: MessageComponentTypes.ACTION_ROW,
               components: [{
+                type: MessageComponentTypes.STRING_SELECT,
+                custom_id: "evaluation",
+                options: [
+                  {
+                    label: 'Positivo',
+                    value: 'positive',
+                    description: 'Positivo',
+                    emoji: {
+                        name: "white_check_mark",
+                        id: '1083320866227626055'
+                    }
+                  },
+                  {
+                    label: 'Negativo',
+                    value: 'negative',
+                    description: 'Negativo',
+                    emoji: {
+                      name: "no_entry",
+                      id: "1083320866227626055"
+                    }
+                  }
+                ]
+              },{
                 type: MessageComponentTypes.INPUT_TEXT,
                 custom_id: "feedback",
                 label: "Aggiungi un nuovo feedback",
@@ -171,6 +194,7 @@ app.post('/interactions', async function (req, res) {
     switch (componentId){
       case "add_feedback":
         console.log(data.components[0].components[0].value)
+        console.log(data.components[1].components[0].value)
        console.log(data);
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
