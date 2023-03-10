@@ -134,10 +134,6 @@ app.post('/interactions', async function (req, res) {
                 custom_id: "feedback",
                 label: "Aggiungi un nuovo feedback",
                 style: 2,
-                min_length: 1,
-                max_length: 4000,
-                placeholder: "Scrivi",
-                required: true
               }]
             }]
 
