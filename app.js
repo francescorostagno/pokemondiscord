@@ -1,6 +1,6 @@
 import express from 'express';
 import {InteractionResponseType, InteractionType, MessageComponentTypes,} from 'discord-interactions';
-import {getRandomEmoji, VerifyDiscordRequest} from './utils.js';
+import {getRandomEmoji, VerifyDiscordRequest, DiscordRequest} from './utils.js';
 import {
   HasGuildCommands,
   HELP_COMMAND,
@@ -180,10 +180,12 @@ app.post('/interactions', async function (req, res) {
         }
         let newFeedBack = `channels/1083778826376597535/messages/${modalValues}`;
         console.log(data);
+        await DiscordRequest(newFeedBack);
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `Aggiunto` },
         });
+
     }
   }
 });
