@@ -1,7 +1,4 @@
-import * as dotenv from 'dotenv' // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
-dotenv.config()
 import express from 'express';
-import {Client, Events, GatewayIntentBits} from "discord.js";
 import {InteractionResponseType, InteractionType, MessageComponentTypes,} from 'discord-interactions';
 import {getRandomEmoji, VerifyDiscordRequest} from './utils.js';
 import {
@@ -17,16 +14,6 @@ import {
 const app = express();
 // Parse request body and verifies incoming requests using discord-interactions package
 app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
-
-
-const token =  process.env.DISCORD_TOKEN;
-
-
-const client = new Client({ intents: [GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildMembers,] });
-
 
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
@@ -167,62 +154,6 @@ app.get('/',function (req, res){
   res.send('Pokemon Discord Bot');
 })
 
-client.on(Events.ClientReady, () => {
-  console.log(`Logged in as ${client.user.tag}!`);
-});
-
-client.on(Events.GuildMemberAdd, (member) => {
-  console.log(`New User "${member.user.username}" has joined "${member.guild.name}"` );
-  let msg = `"${member.user.username}" si è unito!\n Grazie per essere entrato, sei il benvenuto!` + getRandomEmoji();
-  let role = member.guild.roles.cache.find(role => role.name === "membro");
-  const joinembed = new Discord.MessageEmbed()
-      .setTitle(`A new member just arrived!`)
-      .setDescription(msg)
-      .setColor("#FF0000")
-  console.log(msg);
-  console.log(role);
-  member.roles.add(role);
-  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(joinembed);
-});
-
-client.on(Events.MessageCreate,msg => {
-
-  if(msg.content.toLowerCase() === "ping" ){
-    msg.reply("pong")
-  }
-
-  if(msg.content.toLowerCase().indexOf("paypalmerda") !== -1){
-    msg.reply("Cestra libero " + getRandomEmoji())
-  }
-
-})
-
-client.on(Events.MessageDelete,msg => {
-  console.log(msg)
-})
-
-client.on(Events.InteractionCreate, interaction => {
-  console.log('interaction')
-  console.log(interaction)
-});
-
-
-client.on(Events.GuildMemberRemove,(member) => {
-  let goodbyembed = new Discord.MessageEmbed()
-      .setAuthor(`${member.user.tag} just left!`, member.user.avatarURL())
-      .setDescription("Sad! Let's just hope that they enjoyed their stay")
-      .setColor("FF0000");
-  member.guild.channels.cache.find(c => c.name === "pokemoncenter").send(goodbyembed);
-})
-
-// Error Logging
-client.on(Events.Error, (e) => {
-  console.log(e)
-})
-client.on(Events.Warn, (e) => {
-  console.log(e)
-})
-
 app.listen(3000, () => {
   // Check if guild commands from commands.json are installed (if not, install them)
   HasGuildCommands(process.env.APP_ID, process.env.GUILD_ID, [
@@ -234,5 +165,3 @@ app.listen(3000, () => {
   ]);
 });
 
-
-client.login(token);
