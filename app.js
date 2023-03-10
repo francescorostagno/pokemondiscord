@@ -172,15 +172,12 @@ app.post('/interactions', async function (req, res) {
     switch (componentId){
       case "add_feedback":
         console.log(data.components[0].components[0].value);
-        let modalValues = '';
+        let modalValues = data.components[0].components[0].value;
         // Get value of text inputs
-        for (let action of data.components) {
-          let inputComponent = action.components[0];
-          modalValues += `${inputComponent.custom_id}: ${inputComponent.value}\n`;
-        }
+
         let newFeedBack = `channels/1083778826376597535/messages/`;
         console.log(data);
-         await DiscordRequest(newFeedBack, {
+        await DiscordRequest(newFeedBack, {
           method: 'POST',
           body: {
             content: modalValues,
