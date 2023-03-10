@@ -131,29 +131,6 @@ app.post('/interactions', async function (req, res) {
             components: [{
               type: MessageComponentTypes.ACTION_ROW,
               components: [{
-                type: MessageComponentTypes.STRING_SELECT,
-                custom_id: "evaluation",
-                options: [
-                  {
-                    label: 'Positivo',
-                    value: 'positive',
-                    description: 'Positivo',
-                    emoji: {
-                        name: "white_check_mark",
-                        id: '1083320866227626055'
-                    }
-                  },
-                  {
-                    label: 'Negativo',
-                    value: 'negative',
-                    description: 'Negativo',
-                    emoji: {
-                      name: "no_entry",
-                      id: "1083320866227626055"
-                    }
-                  }
-                ]
-              },{
                 type: MessageComponentTypes.INPUT_TEXT,
                 custom_id: "feedback",
                 label: "Aggiungi un nuovo feedback",
@@ -191,11 +168,18 @@ app.post('/interactions', async function (req, res) {
 
   if( type === InteractionType.APPLICATION_MODAL_SUBMIT ){
     const componentId = data.custom_id
+    const userId = req.body.member.user.id;
     switch (componentId){
       case "add_feedback":
-        console.log(data.components[0].components[0].value)
-        console.log(data.components[1].components[0].value)
-       console.log(data);
+        console.log(data.components[0].components[0].value);
+        let modalValues = '';
+        // Get value of text inputs
+        for (let action of data.components) {
+          let inputComponent = action.components[0];
+          modalValues += `${inputComponent.custom_id}: ${inputComponent.value}\n`;
+        }
+        let newFeedBack = `channels/1083778826376597535/messages/${modalValues}`;
+        console.log(data);
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `Aggiunto` },
