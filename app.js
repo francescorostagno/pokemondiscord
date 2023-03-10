@@ -162,17 +162,20 @@ app.post('/interactions', async function (req, res) {
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `<@${userId}> ti sta cercando <@${objectName}>` },
         });
+    }
+    
+  }
+
+  if( type === InteractionType.APPLICATION_MODAL_SUBMIT ){
+    const componentId = data.custom_id
+    switch (componentId){
       case "add_feedback":
-
-
-        console.log(userId);
-        console.log(objectName);
+       console.log(data);
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data: { content: `Aggiunto` },
         });
     }
-    
   }
 });
 
