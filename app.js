@@ -127,16 +127,21 @@ app.post('/interactions', async function (req, res) {
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
           data:{
             title: 'Aggiungi un feedback',
+            custom_id: 'add_feedback'
             components: [{
-              type: 4,
-              custom_id: "feedback",
-              label: "Aggiungi un nuovo feedback",
-              style: 2,
-              min_length: 1,
-              max_length: 4000,
-              placeholder: "Scrivi",
-              required: true
+              type: 1,
+              components: [{
+                type: 4,
+                custom_id: "feedback",
+                label: "Aggiungi un nuovo feedback",
+                style: 2,
+                min_length: 1,
+                max_length: 4000,
+                placeholder: "Scrivi",
+                required: true
+              }]
             }]
+
           }
         })
     }
