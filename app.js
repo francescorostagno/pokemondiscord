@@ -134,7 +134,7 @@ app.post('/interactions', async function (req, res) {
                 type: MessageComponentTypes.INPUT_TEXT,
                 custom_id: "feedback",
                 label: "Aggiungi un nuovo feedback",
-                style: 2,
+                style: 1,
               }]
             }]
 
