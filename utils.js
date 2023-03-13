@@ -19,6 +19,7 @@ export async function DiscordRequest(endpoint, options) {
   const url = 'https://discord.com/api/v10/' + endpoint;
   // Stringify payloads
   if (options.body) options.body = JSON.stringify(options.body);
+  console.log(url);
   // Use node-fetch to make requests
   const res = await fetch(url, {
     headers: {
