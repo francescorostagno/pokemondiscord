@@ -134,7 +134,12 @@ app.post('/interactions', async function (req, res) {
                 type: MessageComponentTypes.INPUT_TEXT,
                 custom_id: "feedback",
                 label: "Aggiungi un nuovo feedback",
-                style: 1,
+                style: 2,
+              },{
+                type: MessageComponentTypes.INPUT_TEXT,
+                custom_id: "feedback_name",
+                label: "Nome dell'utente",
+                style: 2,
               }]
             }]
 
@@ -174,10 +179,11 @@ app.post('/interactions', async function (req, res) {
         console.log(data.components[0].components[0].value);
         let modalValues = data.components[0].components[0].value;
         // Get value of text inputs
+          let user = data.components[0].components[1].value;
 
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: { content: `boot_feedback_add - ` + modalValues + ' - ' + userId },
+          data: { content: `boot_feedback_add - ` + modalValues + ' - ' + userId + ' - ' + user},
         });
 
     }
