@@ -176,9 +176,10 @@ app.post('/interactions', async function (req, res) {
     const userId = req.body.member.user.id;
     switch (componentId){
       case "add_feedback":
-        console.log(data.components[0].components[0].value);
+        console.log(data.components[0].components[1].value);
         let modalValues = data.components[0].components[0].value;
         // Get value of text inputs
+
           let user = data.components[0].components[1].value;
 
         return res.send({
