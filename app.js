@@ -177,7 +177,7 @@ app.post('/interactions', async function (req, res) {
 
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: { content: `New feedback add - ` + modalValues  },
+          data: { content: `boot_feedback_add - ` + modalValues  },
         });
 
     }
