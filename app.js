@@ -175,18 +175,9 @@ app.post('/interactions', async function (req, res) {
         let modalValues = data.components[0].components[0].value;
         // Get value of text inputs
 
-        let newFeedBack = `channels/1084054839740346378/messages/`;
-        console.log(data);
-        await DiscordRequest(newFeedBack, {
-          method: 'POST',
-          body: {
-            content: modalValues,
-            components: []
-          }
-        });
         return res.send({
           type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-          data: { content: `Aggiunto` },
+          data: { content: `Nuovo Feedback Aggiunto - ` + modalValues  },
         });
 
     }
