@@ -109,7 +109,7 @@ app.post('/interactions', async function (req, res) {
                       // Value for your app to identify the button
                       label: 'Sito NerdStore',
                       style: 5,
-                      url: 'http://nerdstoreitalia.it/'
+                      url: 'https://nerdstoreitalia.it/'
                     },{
                       type: MessageComponentTypes.BUTTON,
                       // Value for your app to identify the button
